@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '..')));
 
-const bot = new Telegraf('6684068304:AAEL0MDab0FRXb--X4ECH2OdKLTJ2cZS7Cs');
+const bot = new Telegraf('7316907459:AAGHxl60QwEN2nnXxN7QIjuCsTfeBL1Jaow');
 
 // Обработчик команды /start
 bot.start((ctx) => ctx.reply('Привет! Я бот Telegram.'));
