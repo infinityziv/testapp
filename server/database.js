@@ -1,17 +1,19 @@
-const Database = require('better-sqlite3');
-const db = new Database('progress.db', { verbose: console.log });
+const mongoose = require('mongoose');
 
-// Создаем таблицу для хранения прогресса пользователей, если она еще не существует
-db.exec(`
-    CREATE TABLE IF NOT EXISTS user_progress (
-        telegram_id INTEGER PRIMARY KEY,
-        balance INTEGER,
-        next_open_time INTEGER,
-        level INTEGER,
-        cooldown INTEGER,
-        min_reward INTEGER,
-        max_reward INTEGER
-    )
-`);
+const db = process.env.MONGO_URI; // подключение через env
 
-module.exports = db;
+const connectDB = async () => {
+  try {
+    mongoose.set('strictQuery', false); // Установите strictQuery значение
+    await mongoose.connect(db, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log('MongoDB Connected...');
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+
+module.exports = connectDB;
